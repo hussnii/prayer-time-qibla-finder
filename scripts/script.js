@@ -1,3 +1,4 @@
+/* Dark/light mode toggle */
 let darkMode = localStorage.getItem("darkMode")
 const themeSwitch = document.getElementById("themeSwitch")
 
@@ -18,6 +19,9 @@ themeSwitch.addEventListener("click", () =>{
     darkMode !== "active" ? enableDarkMode() : disableDarkMode() 
 })
 
+
+
+/* Responsive navigation bar toggle */
 const mainMenu = document.querySelector(".mainMenu");
 const closeMenu = document.querySelector(".closeMenu");
 const openMenu = document.querySelector(".openMenu");
@@ -34,3 +38,73 @@ function hideMenu(){
     mainMenu.style.top = "-100%";
 }
 
+
+/* Prayer time API fetching logic */
+
+const cityInput = document.getElementById("cityInput");
+const countryInput = document.getElementById("countryInput");
+const searchBtn = document.getElementById("searchButton");
+
+function showWarning(message) {
+    console.warn("⚠️ WARNING:", message);
+}
+
+
+// --- Placeholder UI Update Functions (Defined in other modules) ---
+function updatePrayerTimes(data) {
+    console.log("Updated Prayer Times:", data.data.timings);
+    // Logic to display Fajr, Dhuhr, Asr, etc., goes here.
+}
+
+function updateHijriDate(data) {
+    console.log("Updated Hijri Date:", data.data.date.hijri);
+    // Logic to display the Hijri date goes here.
+}
+
+function updateCountdown(data) {
+    console.log("Countdown data ready.");
+    // Logic to start the countdown timer goes here.
+}
+
+async function getPrayerTimes() {
+    
+    const city = cityInput.value.trim();
+    const country = countryInput.value.trim();
+
+    
+    if (!city || !country) {
+        showWarning("Please enter both a **city** and a **country** before searching.");
+        return; 
+    }
+    
+    
+    const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=2`;
+
+    try {
+        
+        const response = await fetch(url);
+        
+        
+        const data = await response.json();
+
+        
+        if (data.code !== 200 || data.data === null) {
+            showWarning(`City or Country not found. Please check spelling for "${city}, ${country}".`);
+            return;
+        }
+
+        
+        console.log(`API Data received successfully for: ${city}, ${country}`);
+        updatePrayerTimes(data);
+        updateHijriDate(data);
+        updateCountdown(data);
+
+    } catch (error) {
+        
+        console.error("Network or Fetch Error:", error);
+        showWarning("An error occurred while connecting to the API. Check your connection.");
+    }
+}
+
+
+searchBtn.addEventListener("click", getPrayerTimes);

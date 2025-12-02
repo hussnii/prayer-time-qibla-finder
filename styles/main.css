@@ -152,7 +152,7 @@ nav .mainMenu .closeMenu {
 }
 
 .searchBar input{
-    width: 350px;
+    width: 250px;
     font-size: 15px;
     padding: 10px 20px;
     border-radius: 25px;
@@ -165,16 +165,18 @@ nav .mainMenu .closeMenu {
 
 
 .searchBar input:focus{
-    width: 400px;
+    width: 300px;
    
 }
 
 .searchBar i{
     position: absolute;
-    top:75%;
-    right: 20px;
+    top:7%;
+    left: 350px;
     transform: translateY(-50%);
     color: black;
+    font-size: 25px;
+
 }
 
 
@@ -313,6 +315,7 @@ nav .mainMenu li a:hover{
     background-repeat: no-repeat;
     background-size: 300px auto; 
     background-position: center;
+    margin: 5px auto;
      
 }
 
@@ -358,10 +361,12 @@ nav .mainMenu li a:hover{
 
 .searchBar i{
     position: absolute;
-    top:75%;
-    right: 20px;
+    top:12%;
+    left: 300px;
     transform: translateY(-50%);
     color: black;
+    font-size: 25px;
+
 }
 }
 
