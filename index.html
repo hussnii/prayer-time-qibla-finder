@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hijri Date</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <div class="app-title">prayer time qibla finder</div>
+          
+        </div>
+        <div class="actions">
+            <button id="theme-toggle-btn" class="theme-btn">&#9789;</button>
+            <button id="mobile-menu-open" class="mobile-menu-btn">&#9776;</button>
+        </div>
+    </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" class="mobile-menu">
+    <button id="mobile-menu-close" class="close-btn">&times;</button>
+    <nav class="mobile-nav">
+        <a href="#">Home</a>
+        <a href="#">Calendar</a>
+        <a href="#">Settings</a>
+    </nav>
+</div>
+<div id="mobile-overlay" class="mobile-overlay"></div>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+    <div class="date-bar">
+        <div class="date-left">
+            <svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <div class="date-text">
+                <span id="hijri-date" class="hijri-date">10 Jumada al-Akhira 1447 H</span>
+                <span class="greg-date">01/12/2025</span>
+            </div>
+        </div>
+        <button class="calendar-btn">View Calendar &#9658;</button>
+    </div>
+</main>
+
+<!-- CALENDAR MODAL -->
+<div id="calendar-modal" class="calendar-modal">
+    <div class="calendar-content">
+        <div class="calendar-header">
+            <h3 id="calendar-month">December 2025 / Jumada al-Akhira 1447 H</h3>
+            <button id="calendar-close">&times;</button>
+        </div>
+        <div id="calendar-days" class="calendar-days"></div>
+        <div class="calendar-info">
+         
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    &copy; <span id="year"></span> prayer time qibla finder | Precision for Your Daily Faith
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
