@@ -234,6 +234,10 @@ header{
     font-weight: bold;
 }
 
+.motto{
+    font-size: 0.8em;
+}
+
 
 nav .mainMenu {
     height: 100vh;

@@ -44,9 +44,14 @@ function hideMenu(){
 const cityInput = document.getElementById("cityInput");
 const countryInput = document.getElementById("countryInput");
 const searchBtn = document.getElementById("searchButton");
+const messageArea = document.getElementById("messageArea");
 
 function showWarning(message) {
-    console.warn("⚠️ WARNING:", message);
+    console.warn("⚠️ UI WARNING:", message);
+
+    if (messageArea) {
+        messageArea.textContent = message;
+    }
 }
 
 
@@ -67,7 +72,8 @@ function updateCountdown(data) {
 }
 
 async function getPrayerTimes() {
-    
+    if (messageArea) messageArea.textContent = '';
+
     const city = cityInput.value.trim();
     const country = countryInput.value.trim();
 
@@ -83,6 +89,12 @@ async function getPrayerTimes() {
     try {
         
         const response = await fetch(url);
+
+        if (!response.ok) {
+            
+            showWarning(`Request failed with HTTP status ${response.status}. Please try again.`);
+            return;
+        }
         
         
         const data = await response.json();
@@ -101,7 +113,7 @@ async function getPrayerTimes() {
 
     } catch (error) {
         
-        console.error("Network or Fetch Error:", error);
+        console.error("Network error:", error);
         showWarning("An error occurred while connecting to the API. Check your connection.");
     }
 }
