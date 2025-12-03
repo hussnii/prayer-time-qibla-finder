@@ -1,4 +1,14 @@
+document.addEventListener('DOMContentLoaded', () => {
 
+    const toggle = document.getElementById('darkModeToggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('darkMode');
+        if(document.body.classList.contains('darkMode')){
+            toggle.textContent = "☀️"; 
+        } else {
+            toggle.textContent = "🌙"; 
+        }
+    })});
 const latitude = 9.03; 
 const longitude = 38.74; 
 const method = 2; 
@@ -56,3 +66,116 @@ async function updateCountdown() {
 
 updateCountdown();
 setInterval(updateCountdown, 1000);
+const toggle = document.getElementById("toggle");
+
+toggle.addEventListener("click", () => {
+    document.body.classList.toggle("darkMode");
+
+    // Change button emoji
+    toggle.textContent = 
+        document.body.classList.contains("darkMode") ? "☀️" : "🌙";
+});
+
+const fajir = document.getElementById("fajir");
+const dhuhr = document.getElementById("dhuhr");
+const asr = document.getElementById("asr");
+const maghrib = document.getElementById("maghrib");
+const isha = document.getElementById("isha");
+
+const prayertext1 = document.getElementById("prayertext1");
+const prayertext2 = document.getElementById("prayertext2");
+const prayertext3 = document.getElementById("prayertext3");
+const prayertext4 = document.getElementById("prayertext4");
+const prayertext5 = document.getElementById("prayertext5");
+
+function saveStatus() {
+  const status = {
+    fajir: fajir.checked,
+    dhuhr: dhuhr.checked,
+    asr: asr.checked,
+    maghrib: maghrib.checked,
+    isha: isha.checked,
+    date: new Date().toDateString()
+  };
+  localStorage.setItem("prayerStatus", JSON.stringify(status));
+}
+
+function resetAll() {
+  fajir.checked = false;
+  dhuhr.checked = false;
+  asr.checked = false;
+  maghrib.checked = false;
+  isha.checked = false;
+
+  prayertext1.textContent = "";
+  prayertext2.textContent = "";
+  prayertext3.textContent = "";
+  prayertext4.textContent = "";
+  prayertext5.textContent = "";
+
+  saveStatus();
+}
+
+function loadStatus() {
+  const saved = JSON.parse(localStorage.getItem("prayerStatus"));
+  const today = new Date().toDateString();
+
+  if (!saved || saved.date !== today) {
+    resetAll(); 
+    return;
+  }
+  fajir.checked = saved.fajir;
+  dhuhr.checked = saved.dhuhr;
+  asr.checked = saved.asr;
+  maghrib.checked = saved.maghrib;
+  isha.checked = saved.isha;
+}
+function setupListeners() {
+  fajir.addEventListener("change", () => {
+    prayertext1.textContent = fajir.checked
+      ? "Fajr completed —MashaAllah!"
+      : "";
+    saveStatus();
+  });
+
+  dhuhr.addEventListener("change", () => {
+    prayertext2.textContent = dhuhr.checked
+      ? "Dhuhr completed —MashaAllah!"
+      : "";
+    saveStatus();
+  });
+
+  asr.addEventListener("change", () => {
+    prayertext3.textContent = asr.checked
+      ? "Asr completed — MashaAllah!"
+      : "";
+    saveStatus();
+  });
+
+  maghrib.addEventListener("change", () => {
+    prayertext4.textContent = maghrib.checked
+      ? "Maghrib completed — MashaAllah!"
+      : "";
+    saveStatus();
+  });
+
+  isha.addEventListener("change", () => {
+    prayertext5.textContent = isha.checked
+      ? " Isha completed — MashaAllah!"
+      : "";
+    saveStatus();
+  });
+}
+
+loadStatus();
+setupListeners();
+function checkMidnight() {
+  const saved = JSON.parse(localStorage.getItem("prayerStatus"));
+  const today = new Date().toDateString();
+
+  if (!saved || saved.date !== today) {
+    resetAll();
+  }
+}
+
+setInterval(checkMidnight, 30000);

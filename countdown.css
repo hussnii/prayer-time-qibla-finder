@@ -1,93 +1,195 @@
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; 
     align-items: center;
-    background-image: url('mosque2.png');
-    background-repeat: no-repeat;    
-    background-size: cover;            
-    background-position: center;     
-    background-color: #131010;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     background-blend-mode: overlay;
-
-    
+    background-image: url("mosque2.png");
+    background-color: rgb(57, 124, 192);
 }
-.prayer-box {
-    position: relative;
-    z-index: 5;
-    padding: 60px 90px;
-    background: rgba(252, 208, 97, 0.08);
+
+
+#zikir, .prayer-box, #prayer {
+    padding: 60px 90px;        
+    margin-left: 50px;          
+    border-radius: 0 100px;     
+    background: rgba(255, 223, 0, 0.08);
     backdrop-filter: blur(30px);
-    border-radius:  0px 100px ;
-
-
     border: 2px solid rgba(255, 215, 0, 0.3);
     box-shadow:
-        0 0 25px rgba(255, 200, 0, 0.2),
-        0 0 45px rgba(255, 180, 0, 0.15),
-        inset 0 0 20px rgba(255, 200, 0, 0.15);
-    text-align: center;
+        0 0 25px rgba(255, 215, 0, 0.3),
+        0 0 45px rgba(255, 200, 0, 0.25),
+        inset 0 0 20px rgba(255, 215, 0, 0.15);
     animation: floatBox 5s ease-in-out infinite;
+    text-align: center;
     transition: 0.4s ease;
 }
+.prayer-box{padding: 100px;}
+
 @keyframes floatBox {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-12px); }
     100% { transform: translateY(0px); }
 }
-.prayer-box:hover {
+
+#zikir:hover, .prayer-box:hover, #prayer:hover {
     transform: scale(1.05);
     box-shadow:
-        0 0 35px rgba(255, 215, 0, 0.6),
-        0 0 70px rgba(255, 200, 0, 0.4),
-        inset 0 0 25px rgba(255, 215, 0, 0.4);
+        0 0 50px rgba(255, 215, 0, 0.9),
+        0 0 80px rgba(255, 223, 0, 0.7),
+        inset 0 0 30px rgba(255, 215, 0, 0.4);
 }
 
-.prayer-box h2 {
-    color: #ffd700;
+
+#zikir h2, .prayer-box h2, #prayer h2 {
     font-size: 40px;
     font-weight: 800;
+    color: #ffd700;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 223, 0, 0.6);
+}
+
+
+.h3z, .p {
+    font-size: 25px;
+    color: white;
     margin-bottom: 20px;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 
-#next {
-    color: #fff8d6;
+#counter, #countdown {
+    font-size: 60px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 20px gold;
+}
+
+#countertext, #next, .p1 {
+    margin-top: 20px;
     font-size: 22px;
-    margin-bottom: 15px;
-    letter-spacing: 1.5px;
+    color: #ffd700;
 }
 
-#countdown {
-    font-size: 64px;
-    font-weight: 700;
+
+.buttons {
+    margin-top: 25px;
+}
+
+.button {
+    padding: 12px 25px;
+    margin: 5px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: gold;
+    color: black;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px gold;
+}
+
+
+body.darkMode {
+    background-image: url("mosque4-dark.png");
+    background-color: #111214;
+}
+
+body.darkMode #zikir, 
+body.darkMode .prayer-box, 
+body.darkMode #prayer {
+    background: rgba(0, 130, 210, 0.1);
+    border: 2px solid #1a7cc9;
+    box-shadow:
+        0 0 25px #1a7cc9,
+        0 0 45px #0b5d97,
+        inset 0 0 20px #1a7cc9;
+}
+
+body.darkMode #zikir:hover, 
+body.darkMode .prayer-box:hover, 
+body.darkMode #prayer:hover {
+    box-shadow:
+        0 0 55px #c8e9ff,
+        0 0 80px #1a7cc9,
+        inset 0 0 30px #c8e9ff;
+}
+
+body.darkMode h2 {
+    color: #c8e9ff;
+}
+
+body.darkMode .h3z, 
+body.darkMode .p {
+    color: #e5f4ff;
+}
+
+body.darkMode #counter, 
+body.darkMode #countdown {
     color: #ffffff;
-    text-shadow:
-        0 0 20px rgba(255,255,255,0.5),
-        0 0 40px rgba(255,215,0,0.5);
 }
 
+body.darkMode #countertext, 
+body.darkMode #next, 
+body.darkMode .p1 {
+    color: #a3d9ff;
+}
+
+body.darkMode .button {
+    background: #1a7cc9;
+    color: white;
+}
+
+body.darkMode .button:hover {
+    box-shadow: 0 0 15px #c8e9ff;
+}
+
+
+#darkModeToggle,#toggle {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 12px 18px;
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+#darkModeToggle,#toggle:hover {
+    transform: scale(1.1);
+}
 
 @media (max-width: 768px) {
-    .prayer-box {
+    #zikir, .prayer-box, #prayer {
         padding: 40px 50px;
     }
-    #countdown {
+    #counter, #countdown {
         font-size: 44px;
     }
-    .prayer-box h2 {
+    #zikir h2, .prayer-box h2, #prayer h2 {
         font-size: 30px;
     }
 }
 
 @media (max-width: 480px) {
-    .prayer-box {
+    #zikir, .prayer-box, #prayer {
         padding: 25px 30px;
     }
-    #countdown {
+    #counter, #countdown {
         font-size: 32px;
     }
 }
