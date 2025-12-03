@@ -1,0 +1,195 @@
+:root {
+    --base-color: #c8e9ff;
+    --base-variant: #7bbde8;
+    --text-color: #fff;
+    --secondary-text: #000;
+    --hover-color: #135ea4;
+
+    /* Mapping to existing color variables */
+    --bg-dark: var(--base-color);
+    --primary-dark: var(--base-variant);
+    --accent-light: var(--hover-color);
+    --off-white: var(--text-color);
+}
+
+body[data-theme="dark"] {
+    --base-color:#043a6c;
+    --base-variant:#004c7f;
+    --text-color:#000;
+    --secondary-text:#fff;
+    --hover-color:#c8e9ff;
+
+    --bg-dark: var(--base-color);
+    --primary-dark: var(--base-variant);
+    --accent-light: var(--hover-color);
+    --off-white: var(--secondary-text);
+}
+
+body {
+    display:flex; 
+    flex-direction:column; 
+    margin:0;
+    font-family:'Inter',sans-serif; 
+    background-color:var(--bg-dark); 
+    color:var(--off-white);
+    transition:background-color 0.3s,color 0.3s; 
+    min-height:100vh;
+}
+
+/* ------------------------------
+   BUTTONS
+------------------------------*/
+.actions button,
+.location-inputs button,
+.calendar-btn { 
+    background:none; 
+    border:none; 
+    cursor:pointer; 
+    transition:all 0.3s ease; 
+}
+
+/* ------------------------------
+   HEADER
+------------------------------*/
+.header {
+    background-color:var(--primary-dark); 
+    padding:1rem 2rem;
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+
+.header-container { display:flex; justify-content:space-between; align-items:center; width:100%; }
+.logo .app-title { font-size:1.5rem; font-weight:800; }
+
+.actions button { font-size:1.5rem; margin-left:1rem; color:var(--off-white); }
+.actions button:hover { color:var(--accent-light); }
+
+/* ------------------------------
+   MAIN CONTENT
+------------------------------*/
+.main { flex:1; display:flex; justify-content:center; align-items:center; padding:2rem; }
+.main-content-wrapper { display:flex; flex-direction:column; align-items:center; width:100%; max-width:900px; }
+
+.date-bar {
+    background-color:var(--bg-dark); 
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    border:1px solid rgba(0,0,0,0.2); 
+    border-radius:1rem; 
+    padding:1rem 2rem;
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    width:100%; 
+    margin-bottom:1.5rem;
+}
+
+.date-left { display:flex; align-items:center; }
+.calendar-icon { width:2rem; height:2rem; margin-right:1rem; color:var(--accent-light); }
+.date-text .hijri-date { font-weight:800; font-size:1.5rem; display:block; color:var(--accent-light); }
+.date-text .greg-date { font-size:0.9rem; color:var(--secondary-text); }
+
+.calendar-btn {
+    background-color:var(--accent-light); 
+    padding:0.8rem 1.5rem; 
+    border-radius:1rem;
+    font-weight:600; 
+    color:var(--primary-dark); 
+    display:flex; 
+    align-items:center; 
+    gap:0.5rem;
+}
+.calendar-btn:hover { background-color:var(--hover-color); transform:translateY(-2px); }
+
+.location-inputs {
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:1rem; 
+    margin:1.5rem 0; 
+    justify-content:center; 
+    width:100%;
+}
+.location-inputs input {
+    flex-grow:1; 
+    min-width:150px; 
+    padding:0.7rem 1rem; 
+    border-radius:0.5rem;
+    border:1px solid var(--primary-dark); 
+    background-color:var(--primary-dark); 
+    color:var(--off-white);
+    font-size:1rem; 
+    outline:none; 
+    transition:border-color 0.3s, box-shadow 0.3s;
+}
+.location-inputs button {
+    padding:0.7rem 1.5rem; 
+    border-radius:0.5rem; 
+    background-color:var(--accent-light);
+    color:var(--primary-dark); 
+    font-weight:600;
+}
+
+/* ------------------------------
+   PRAYER TIMES GRID
+------------------------------*/
+.prayer-times-section { width:100%; margin-bottom:2rem; }
+.prayer-time-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:1rem; text-align:center; }
+.time-card {
+    background-color:var(--primary-dark); 
+    padding:1rem; 
+    border-radius:0.75rem; 
+    border:1px solid var(--secondary-text);
+    box-shadow:0 4px 10px rgba(0,0,0,0.2); 
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+.time-card:hover { transform:translateY(-4px); }
+
+.time-name { font-size:0.9rem; color:var(--off-white); margin-bottom:0.25rem; font-weight:400; }
+.time-value { font-size:1.8rem; font-weight:800; color:var(--accent-light); }
+
+.hijri-info { text-align:center; font-size:1.1rem; color:var(--accent-light); font-weight:600; margin-bottom:2rem; }
+
+/* ------------------------------
+   FOOTER
+------------------------------*/
+.footer { text-align:center; padding:1rem; font-size:0.9rem; background-color:var(--primary-dark); color:var(--off-white); flex-shrink:0; }
+
+/* ------------------------------
+   CALENDAR MODAL
+------------------------------*/
+.calendar-modal {
+    display:none; 
+    position:fixed; 
+    inset:0; 
+    background-color:rgba(0,0,0,0.7);
+    justify-content:center; 
+    align-items:center; 
+    z-index:50;
+}
+.calendar-content { 
+    background-color:#fff; 
+    color:#222; 
+    padding:2rem; 
+    border-radius:1rem; 
+    max-width:600px; 
+    width:90%; 
+}
+
+.calendar-days { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-top:1rem; }
+.calendar-day-name { font-weight:bold; text-align:center; padding:0.5rem 0; background-color:#e2e8f0; border-radius:0.25rem; }
+.calendar-day {
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    height:70px; border-radius:0.5rem; background-color:#fff; color:#222; cursor:pointer; transition:all 0.2s;
+}
+.calendar-day.today {
+    background-color:var(--accent-light); 
+    color:var(--primary-dark);
+    font-weight:bold; 
+    box-shadow:0 0 10px var(--accent-light); 
+    border:1px solid var(--accent-light);
+}
+
+#mobile-menu, #mobile-overlay {
+    display: none !important;
+}
