@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Remove standalone dark mode toggle since nav handles it now
     const toggle = document.getElementById('darkModeToggle');
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('darkMode');
-        toggle.textContent = document.body.classList.contains('darkMode') ? "☀️" : "🌙";
-    });
+    if (toggle) {
+        toggle.remove();
+    }
 
     const latitude = 9.03;
     const longitude = 38.74;

@@ -25,7 +25,6 @@
 header{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--base-color);
-    height: 100vh;
 }
 
 .navBar{
@@ -117,20 +116,23 @@ nav .mainMenu .closeMenu {
     display: flex;
     padding: 50px;
     color: var(--secondary-text);
+    min-height: calc(100vh - 110px);
     
 }
 
 .imgContent {
     width: 160vw;
-    height: 55vh;
-
-    background-image: url(../assets/muslimspraying.png);
+    height: auto;
+    min-height: 60vh;
+    background-image: url(../images/muslimspraying.png);
     background-repeat: no-repeat;
     background-size: 500px auto; 
-    
-    
-    background-position: center;
-    
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 50px;
+    padding-top: 20px;
 }
 
 #quote{
@@ -209,7 +211,6 @@ nav .mainMenu .closeMenu {
 header{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--base-color);
-    height: 100vh;
 }
 
 .navBar{
@@ -245,7 +246,7 @@ nav .mainMenu {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1000;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -308,24 +309,32 @@ nav .mainMenu li a:hover{
 .headerContainer{
     padding: 3px;
     color: var(--secondary-text);
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .imgContent {
-    width: 370px;
-    height: 200px;
-    
-    background-image: url(../assets/muslimspraying.png);
+    width: 100%;
+    max-width: 370px;
+    height: auto;
+    min-height: 220px;
+    background-image: url(../images/muslimspraying.png);
     background-repeat: no-repeat;
-    background-size: 300px auto; 
-    background-position: center;
-    margin: 5px auto;
-     
+    background-size: 280px auto; 
+    background-position: center top;
+    margin: 5px auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+    padding-top: 10px;
 }
 
 #quote{
-    font-size: 1.1em;
-    margin: 10px auto;
+    font-size: 1em;
+    margin: 0 0 15px 0;
+    line-height: 1.5;
 }
 
 
@@ -334,10 +343,11 @@ nav .mainMenu li a:hover{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    align-content: center;
-    padding: 5px;
-    margin: 10px;
-    height: 30vh;
+    align-content: flex-start;
+    padding: 10px;
+    margin: 15px 10px;
+    width: 100%;
+    min-height: auto;
 }
 
 .searchBar{

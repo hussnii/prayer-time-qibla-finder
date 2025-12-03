@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tasbih App</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="icon" href="images/mosque icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 <style>
 
     :root{
@@ -134,42 +137,188 @@
     .footer-btn:hover {
         background: var(--hover-color);
     }
+
+    /* Responsive Design */
+    @media (max-width: 800px) {
+        .top-box {
+            width: 90%;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        #zikirSelect {
+            font-size: 14px !important;
+            padding: 10px !important;
+        }
+
+        .button-row {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .dual-button {
+            width: 100px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .misbaha-image {
+            width: 90%;
+            max-width: 280px;
+        }
+
+        .count-btn, .reset-btn {
+            padding: 10px 22px;
+            font-size: 18px;
+        }
+
+        .arabic-text {
+            font-size: 18px;
+        }
+
+        .footer {
+            gap: 15px;
+        }
+
+        .footer-btn {
+            font-size: 20px;
+            padding: 8px 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .top-box {
+            width: 95%;
+            padding: 12px;
+            font-size: 18px;
+        }
+
+        #zikirSelect {
+            font-size: 13px !important;
+            padding: 8px !important;
+        }
+
+        .dual-button {
+            width: 85px;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .reset-btn {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .misbaha-image {
+            max-width: 240px;
+        }
+
+        .count-btn {
+            padding: 8px 18px;
+            font-size: 16px;
+        }
+
+        .arabic-text {
+            font-size: 16px;
+        }
+
+        .footer-btn {
+            font-size: 18px;
+            padding: 6px 12px;
+        }
+    }
 </style>
 </head>
 <body>
 
-    <div class="top-box" id="topText">أذكار</div>
+<header>
+    <nav class="navBar">
+        <div class="logoGroup">
+             <img src="images/mosque icon_.png" alt="" width="80" height="80">
+             <div>
+                <p class="logo">Prayer Times & Qibla Finder</p>
+                <p class="motto">Modern, calm daily prayer companion</p>
+             </div>    
+        </div>   
+        <div class="openMenu">
+            <i class="fa fa-bars"></i>
+        </div>
+
+        <ul class="mainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="countdown.html">Prayer Times</a></li>
+                <li><a href="qibla.html">Qibla</a></li>
+                <li><a href="zikircounter.html">Zikr Counter</a></li>
+                
+                <li class="closeMenu">
+                    <i class="fa fa-times"></i>
+                </li>
+        </ul>
+        <div class="themeBtn">
+            <button id="themeSwitch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main style="min-height: calc(100vh - 110px); padding: 20px 20px 80px 20px;">
+<div style="max-width: 600px; margin: 0 auto;">
+
+    <div class="top-box" id="topText" style="margin-top: 0;">أذكار</div>
+
+    <!-- Zikr Selection Dropdown -->
+    <div style="margin: 20px auto; max-width: 300px;">
+        <select id="zikirSelect" style="width: 100%; padding: 12px; font-size: 16px; border-radius: 10px; border: 2px solid var(--base-variant); background: var(--base-color); color: var(--secondary-text); cursor: pointer; font-weight: bold;">
+            <option value="0">أذكار (General)</option>
+            <option value="1">سبحان الله (SubhanAllah)</option>
+            <option value="2">الحمد لله (Alhamdulillah)</option>
+            <option value="3">الله أكبر (Allahu Akbar)</option>
+            <option value="4">لا إله إلا الله (La ilaha illallah)</option>
+            <option value="5">اللهم صل وسلم على نبينا محمد (Salawat)</option>
+        </select>
+    </div>
 
     
-    <div class="button-row">
+    <div class="button-row" style="margin: 20px auto;">
         <button id="countDisplay" class="dual-button left-btn">0</button>
         <button id="resetBtn" class="reset-btn">Reset</button>
         <button id="timeDisplay" class="dual-button right-btn">00:00</button>
     </div>
 
 
-    <div class="image-container">
-        <img src="imagenow.jpg" class="misbaha-image" id="misbahaImg">
+    <div class="image-container" style="margin: 20px auto; text-align: center;">
+        <img src="images/imagenow.jpg" class="misbaha-image" id="misbahaImg">
     </div>
 
   
-    <button id="countBtn" class="count-btn">Count</button>
+    <button id="countBtn" class="count-btn" style="margin: 20px auto; display: block;">Count</button>
 
     
     <p id="arabicText" class="arabic-text">اللهم صل وسلم على سيدنا محمد ﷺ</p>
 
     
-    <div class="footer">
+    <div class="footer" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: auto;">
         <button id="pauseBtn" class="footer-btn">=</button>
         <button id="modeBtn" class="footer-btn">🌙</button>
     </div>
 
-    
-    <script>
-       let count = 0;
+</div>
+</main>
+
+<script src="js/script.js"></script>
+<script>
+// Zikir Counter Script
+let count = 0;
 let isPaused = false;
-let darkMode = false;
 let timerActive = true;
+let selectedZikirIndex = 0;
 
 const countDisplay = document.getElementById("countDisplay");
 const resetBtn = document.getElementById("resetBtn");
@@ -180,8 +329,7 @@ const pauseBtn = document.getElementById("pauseBtn");
 const modeBtn = document.getElementById("modeBtn");
 const misbahaImg = document.getElementById("misbahaImg");
 const topText = document.getElementById("topText");
-const body = document.body;
-
+const zikirSelect = document.getElementById("zikirSelect");
 
 const azkarTop = [
     "أذكار",
@@ -192,36 +340,42 @@ const azkarTop = [
     "اللهم صل وسلم على نبينا محمد"
 ];
 
+// Handle zikir selection change
+zikirSelect.addEventListener("change", (e) => {
+    selectedZikirIndex = parseInt(e.target.value);
+    topText.textContent = azkarTop[selectedZikirIndex];
+    count = 0;
+    countDisplay.textContent = count;
+    arabicText.style.display = "none";
+});
 
 countBtn.addEventListener("click", () => {
     if (!isPaused) {
         count++;
         countDisplay.textContent = count;
 
-       
         misbahaImg.style.transform = "rotate(20deg)";
         setTimeout(() => { misbahaImg.style.transform = "rotate(0deg)"; }, 150);
 
-       
         if (count % 10 === 0) {
             arabicText.style.display = "block";
             setTimeout(() => { arabicText.style.display = "none"; }, 3000);
         }
 
-       
-        let index = (count - 1) % azkarTop.length;
-        topText.textContent = azkarTop[index];
+        // Only cycle if general mode (index 0) is selected
+        if (selectedZikirIndex === 0) {
+            let index = (count - 1) % azkarTop.length;
+            topText.textContent = azkarTop[index];
+        }
     }
 });
-
 
 resetBtn.addEventListener("click", () => {
     count = 0;
     countDisplay.textContent = count;
     arabicText.style.display = "none";
-    topText.textContent = azkarTop[0];
+    topText.textContent = azkarTop[selectedZikirIndex];
 });
-
 
 let seconds = 0;
 let minutes = 0;
@@ -235,31 +389,25 @@ function startTimer() {
         minutes++;
     }
 
-    
     timeDisplay.textContent =
         `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
-let timer = setInterval(startTimer, 1000);
-
+let zikirTimer = setInterval(startTimer, 1000);
 
 document.addEventListener("visibilitychange", () => {
     timerActive = !document.hidden;
 });
-
 
 pauseBtn.addEventListener("click", () => {
     isPaused = !isPaused;
     pauseBtn.textContent = isPaused ? "▶️" : "=";
 });
 
-
 modeBtn.addEventListener("click", () => {
-    darkMode = !darkMode;
-    body.classList.toggle("darkMode");
-    modeBtn.textContent = darkMode ? "☀️" : "🌙";
+    document.body.classList.toggle("darkMode");
+    modeBtn.textContent = document.body.classList.contains("darkMode") ? "☀️" : "🌙";
 });
-
-    </script>
+</script>
 </body>
 </html>

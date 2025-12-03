@@ -3,22 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="selat.css">
-  <script src="countdown.js"defer></script>
+  <title>Prayer Tracker</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/selat.css">
+  <link rel="icon" href="images/mosque icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <script src="js/countdown.js" defer></script>
 
 </head>
-<body>
-  <button id="toggle">🌙</button>
+<body style="margin: 0; padding: 0; background: var(--base-color); min-height: 100vh;">
+<header>
+    <nav class="navBar">
+        <div class="logoGroup">
+             <img src="images/mosque icon_.png" alt="" width="80" height="80">
+             <div>
+                <p class="logo">Prayer Times & Qibla Finder</p>
+                <p class="motto">Modern, calm daily prayer companion</p>
+             </div>    
+        </div>   
+        <div class="openMenu">
+            <i class="fa fa-bars"></i>
+        </div>
 
-  <div id="prayer" >
-   <h2>PRAYER TRAKER</h2>
-   <label class="p"><input type="checkbox" name="tracker" id="fajir">Fajr</label><p class="p1" id="prayertext1"></p>
+        <ul class="mainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="countdown.html">Prayer Times</a></li>
+                <li><a href="qibla.html">Qibla</a></li>
+                <li><a href="zikircounter.html">Zikr Counter</a></li>
+                
+                <li class="closeMenu">
+                    <i class="fa fa-times"></i>
+                </li>
+        </ul>
+        <div class="themeBtn">
+            <button id="themeSwitch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main style="display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 110px); padding: 20px 10px;">
+  <button id="toggle" style="display: none;">🌙</button>
+
+  <div id="prayer" style="margin: 0 auto; width: 100%; max-width: 500px;">
+   <h2 style="font-size: clamp(1.3rem, 5vw, 1.8rem);">PRAYER TRACKER</h2>
+   <label class="p"><input type="checkbox" name="tracker" id="fajr">Fajr</label><p class="p1" id="prayertext1"></p>
    <label class="p"><input type="checkbox" name="tracker" id="dhuhr">Dhuhr</label><p  class="p1" id="prayertext2"></p>
    <label class="p"><input type="checkbox" name="tracker" id="asr">Asr</label><p class="p1" id="prayertext3"></p>
-   <label class="p"><input type="checkbox" name="tracker" id="maghrib">Magrib</label><p class="p1" id="prayertext4"></p>
+   <label class="p"><input type="checkbox" name="tracker" id="maghrib">Maghrib</label><p class="p1" id="prayertext4"></p>
    <label class="p"><input type="checkbox" name="tracker" id="isha">Isha</label>
    <p  class="p1" id="prayertext5"></p>
   </div>
+</main>
+
+<script src="js/script.js"></script>
 </body>
 </html>

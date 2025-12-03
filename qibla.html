@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qibla Compass</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="icon" href="images/mosque icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
 <style>
 * {
@@ -13,19 +16,10 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #c8e9ff;
-    color: #000;
-}
-
 .qibla-section {
     text-align: center;
     padding: 1.5rem;
-    background: #7bbde8;
+    background: var(--base-variant);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     width: 320px;
@@ -33,19 +27,20 @@ body {
 
 .qibla-section h1 {
     margin-bottom: 15px;
+    color: var(--text-color);
 }
 
 .compass {
     width: 250px;
     height: 250px;
     margin: 1rem auto;
-    border: 6px solid #135ea4;
+    border: 6px solid var(--hover-color);
     border-radius: 50%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #c8e9ff;
+    background: var(--base-color);
     box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -67,11 +62,102 @@ body {
     margin-top: 20px;
     font-size: 1.1rem;
     font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .qibla-section {
+        width: 90%;
+        max-width: 350px;
+        padding: 1.2rem;
+    }
+
+    .qibla-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .compass {
+        width: 220px;
+        height: 220px;
+        border-width: 5px;
+    }
+
+    .arrow {
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 50px solid #e63946;
+    }
+
+    .label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .qibla-section {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .qibla-section h1 {
+        font-size: 1.3rem;
+    }
+
+    .compass {
+        width: 180px;
+        height: 180px;
+        border-width: 4px;
+    }
+
+    .arrow {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 40px solid #e63946;
+    }
+
+    .label {
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
 }
 </style>
 </head>
 
-<body>
+<body style="margin: 0; padding: 0; background: var(--base-color);">
+<header>
+    <nav class="navBar">
+        <div class="logoGroup">
+             <img src="images/mosque icon_.png" alt="" width="80" height="80">
+             <div>
+                <p class="logo">Prayer Times & Qibla Finder</p>
+                <p class="motto">Modern, calm daily prayer companion</p>
+             </div>    
+        </div>   
+        <div class="openMenu">
+            <i class="fa fa-bars"></i>
+        </div>
+
+        <ul class="mainMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="countdown.html">Prayer Times</a></li>
+                <li><a href="qibla.html">Qibla</a></li>
+                <li><a href="zikircounter.html">Zikr Counter</a></li>
+                
+                <li class="closeMenu">
+                    <i class="fa fa-times"></i>
+                </li>
+        </ul>
+        <div class="themeBtn">
+            <button id="themeSwitch">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main id="qiblaBody" style="display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 110px); padding: 10px;">
 
 <div class="qibla-section">
     <h1>Qibla Compass</h1>
@@ -83,12 +169,15 @@ body {
     <div class="label" id="message">Finding your location...</div>
 </div>
 
+</main>
+
+<script src="js/script.js"></script>
 <script>
 let qiblaAngle = null;
 
 // Fetch Qibla direction from API
 function fetchQibla(lat, lng) {
-    fetch(https://api.aladhan.com/v1/qibla/${lat}/${lng})
+    fetch(`https://api.aladhan.com/v1/qibla/${lat}/${lng}`)
         .then(res => res.json())
         .then(data => {
             qiblaAngle = data.data.direction;
@@ -131,7 +220,7 @@ function handleOrientation(event) {
     if (heading !== null) {
         const rotation = (qiblaAngle - heading + 360) % 360;
         document.getElementById("arrow").style.transform =
-            translate(-50%, -100%) rotate(${rotation}deg);
+            `translate(-50%, -100%) rotate(${rotation}deg)`;
     }
 }
 </script>
