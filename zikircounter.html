@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasbih App</title>
+<style>
+
+    :root{
+        --base-color: #c8e9ff;
+        --base-variant:#7bbde8;
+        --text-color:#fff;
+        --secondary-text:#000;
+        --hover-color:#135ea4;
+    }
+
+    .darkMode{
+        --base-color:#043a6c;
+        --base-variant:#004c7f;
+        --text-color:#000;
+        --secondary-text:#fff;
+        --hover-color:#c8e9ff;
+    }
+
+   
+    body {
+        margin: 0;
+        padding: 0;
+        background: var(--base-color);
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        color: var(--text-color);
+        transition: 0.3s;
+    }
+
+   
+    .top-box {
+        width: 80%;
+        margin: 20px auto;
+        background: linear-gradient(var(--base-variant), #b4c7ff);
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px black;
+        font-size: 24px;
+    }
+
+    
+    .button-row {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .dual-button {
+        width: 120px;
+        padding: 12px;
+        font-size: 18px;
+        border: none;
+        margin: 0;
+    }
+
+    .left-btn {
+        background: linear-gradient(#007bff, #5aa8ff);
+        color: white;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .right-btn {
+        background: linear-gradient(#dbdbdb, #8f9ca7);
+        color: #000;
+        border-radius: 0 10px 10px 0;
+    }
+
+    /* IMAGE AREA */
+    .image-container {
+        margin-top: 40px;
+    }
+
+    .misbaha-image {
+        width: 80%;
+        max-width: 350px;
+        transition: transform 0.2s ease;
+    }
+
+    /* GOLDEN COUNT & RESET BUTTONS */
+    .count-btn, .reset-btn {
+        margin-top: 20px;
+        background: #d4af37;
+        color: black;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .count-btn:hover, .reset-btn:hover {
+        background: #f5d96f;
+    }
+
+   
+    .arabic-text {
+        margin-top: 25px;
+        font-size: 22px;
+        color: #f5d96f;
+        font-weight: bold;
+        display: none;
+    }
+
+    
+    .footer {
+        position: fixed;
+        bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .footer-btn {
+        background: var(--base-variant);
+        border: none;
+        color: var(--secondary-text);
+        font-size: 22px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .footer-btn:hover {
+        background: var(--hover-color);
+    }
+</style>
+</head>
+<body>
+
+    <div class="top-box" id="topText">أذكار</div>
+
+    
+    <div class="button-row">
+        <button id="countDisplay" class="dual-button left-btn">0</button>
+        <button id="resetBtn" class="reset-btn">Reset</button>
+        <button id="timeDisplay" class="dual-button right-btn">00:00</button>
+    </div>
+
+
+    <div class="image-container">
+        <img src="imagenow.jpg" class="misbaha-image" id="misbahaImg">
+    </div>
+
+  
+    <button id="countBtn" class="count-btn">Count</button>
+
+    
+    <p id="arabicText" class="arabic-text">اللهم صل وسلم على سيدنا محمد ﷺ</p>
+
+    
+    <div class="footer">
+        <button id="pauseBtn" class="footer-btn">=</button>
+        <button id="modeBtn" class="footer-btn">🌙</button>
+    </div>
+
+    
+    <script>
+       let count = 0;
+let isPaused = false;
+let darkMode = false;
+let timerActive = true;
+
+const countDisplay = document.getElementById("countDisplay");
+const resetBtn = document.getElementById("resetBtn");
+const timeDisplay = document.getElementById("timeDisplay");
+const countBtn = document.getElementById("countBtn");
+const arabicText = document.getElementById("arabicText");
+const pauseBtn = document.getElementById("pauseBtn");
+const modeBtn = document.getElementById("modeBtn");
+const misbahaImg = document.getElementById("misbahaImg");
+const topText = document.getElementById("topText");
+const body = document.body;
+
+
+const azkarTop = [
+    "أذكار",
+    "سبحان الله",
+    "الحمد لله",
+    "الله أكبر",
+    "لا إله إلا الله",
+    "اللهم صل وسلم على نبينا محمد"
+];
+
+
+countBtn.addEventListener("click", () => {
+    if (!isPaused) {
+        count++;
+        countDisplay.textContent = count;
+
+       
+        misbahaImg.style.transform = "rotate(20deg)";
+        setTimeout(() => { misbahaImg.style.transform = "rotate(0deg)"; }, 150);
+
+       
+        if (count % 10 === 0) {
+            arabicText.style.display = "block";
+            setTimeout(() => { arabicText.style.display = "none"; }, 3000);
+        }
+
+       
+        let index = (count - 1) % azkarTop.length;
+        topText.textContent = azkarTop[index];
+    }
+});
+
+
+resetBtn.addEventListener("click", () => {
+    count = 0;
+    countDisplay.textContent = count;
+    arabicText.style.display = "none";
+    topText.textContent = azkarTop[0];
+});
+
+
+let seconds = 0;
+let minutes = 0;
+
+function startTimer() {
+    if (!timerActive) return;
+
+    seconds++;
+    if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+    }
+
+    
+    timeDisplay.textContent =
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
+let timer = setInterval(startTimer, 1000);
+
+
+document.addEventListener("visibilitychange", () => {
+    timerActive = !document.hidden;
+});
+
+
+pauseBtn.addEventListener("click", () => {
+    isPaused = !isPaused;
+    pauseBtn.textContent = isPaused ? "▶️" : "=";
+});
+
+
+modeBtn.addEventListener("click", () => {
+    darkMode = !darkMode;
+    body.classList.toggle("darkMode");
+    modeBtn.textContent = darkMode ? "☀️" : "🌙";
+});
+
+    </script>
+</body>
+</html>
