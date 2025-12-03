@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hijri Date</title>
+<title>Hijri Date & Prayer Times</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="dark">
 
-<!-- HEADER -->
 <header class="header">
     <div class="header-container">
         <div class="logo">
             <div class="app-title">prayer time qibla finder</div>
-          
         </div>
         <div class="actions">
             <button id="theme-toggle-btn" class="theme-btn">&#9789;</button>
@@ -22,7 +20,6 @@
     </div>
 </header>
 
-<!-- MOBILE MENU -->
 <div id="mobile-menu" class="mobile-menu">
     <button id="mobile-menu-close" class="close-btn">&times;</button>
     <nav class="mobile-nav">
@@ -33,37 +30,81 @@
 </div>
 <div id="mobile-overlay" class="mobile-overlay"></div>
 
-<!-- MAIN CONTENT -->
 <main class="main">
-    <div class="date-bar">
-        <div class="date-left">
-            <svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            <div class="date-text">
-                <span id="hijri-date" class="hijri-date">10 Jumada al-Akhira 1447 H</span>
-                <span class="greg-date">01/12/2025</span>
+    <div class="main-content-wrapper">
+
+        <div class="date-bar">
+            <div class="date-left">
+                <svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <div class="date-text">
+                    <span id="hijri-date-full" class="hijri-date">Loading Hijri Date...</span>
+                    <span class="greg-date">Loading...</span>
+                </div>
             </div>
+            <button class="calendar-btn">View Calendar &#9658;</button>
         </div>
-        <button class="calendar-btn">View Calendar &#9658;</button>
+
+        <div class="location-inputs">
+            <input type="text" id="city" placeholder="Enter your city">
+            <input type="text" id="country" placeholder="Enter your country">
+            <button id="get-prayer-times">Get Prayer Times</button>
+        </div>
+
+        <section class="prayer-times-section">
+            <div class="prayer-time-grid">
+                <div class="time-card">
+                    <div class="time-name">Fajr</div>
+                    <div id="fajr-time" class="time-value">--:--</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-name">Sunrise</div>
+                    <div id="sunrise-time" class="time-value">--:--</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-name">Dhuhr<br>Midday</div>
+                    <div id="dhuhr-time" class="time-value">--:--</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-name">Asr</div>
+                    <div id="asr-time" class="time-value">--:--</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-name">Maghrib</div>
+                    <div id="maghrib-time" class="time-value">--:--</div>
+                </div>
+                <div class="time-card">
+                    <div class="time-name">Isha</div>
+                    <div id="isha-time" class="time-value">--:--</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="hijri-info">
+            <span id="hijri-date">--</span>,
+            <span id="hijri-weekday">--</span>,
+            <span id="hijri-month">--</span>
+            <span id="hijri-year">--</span>
+        </div>
     </div>
 </main>
 
-<!-- CALENDAR MODAL -->
 <div id="calendar-modal" class="calendar-modal">
     <div class="calendar-content">
         <div class="calendar-header">
-            <h3 id="calendar-month">December 2025 / Jumada al-Akhira 1447 H</h3>
+            <h3 id="calendar-month">Loading Calendar...</h3>
             <button id="calendar-close">&times;</button>
         </div>
         <div id="calendar-days" class="calendar-days"></div>
         <div class="calendar-info">
-         
-        </div>
+            </div>
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="footer">
     &copy; <span id="year"></span> prayer time qibla finder | Precision for Your Daily Faith
+<br>
+<br>
+developed in collaboration with NSDA group 3 students
 </footer>
 
 <script src="script.js"></script>
