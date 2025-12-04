@@ -19,9 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function getPrayerTimes() {
         const url = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.data.timings;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.data.timings;
+        } catch {
+            return null;
+        }
     }
 
     function convertToDate(timeStr) {
@@ -54,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateRightBoxText() {
-        const motivationEl = document.getElementById("upcomingPrayer"); // You can also create a separate span with id="motivationText"
+        const motivationEl = document.getElementById("motivationText");
         motivationEl.innerText = motivationalTexts[Math.floor(Math.random() * motivationalTexts.length)];
     }
 
@@ -68,17 +72,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const countdownEl = document.getElementById("countdown");
         const nextEl = document.getElementById("next");
+        const lastEl = document.getElementById("lastPrayer");
 
         if (remaining <= 0) {
             countdownEl.innerText = "00:00:00";
             nextEl.innerText = `Time for ${next.name}!`;
-            updateRightBoxText(); // Update motivational text when countdown hits 0
         } else {
             countdownEl.innerText = formatCountdown(remaining);
             nextEl.innerText = `Time left to ${next.name}`;
         }
 
-        document.getElementById("lastPrayer").innerText = `Last Prayer: ${last}`;
+        lastEl.innerText = `Last Prayer: ${last}`;
+        updateRightBoxText();
     }
 
     updateCountdown();
