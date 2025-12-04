@@ -1,0 +1,283 @@
+:root {
+    --bg-dark: #1E4646;
+    --primary-dark: #071F1F;
+    --accent-light: #8BAC7D;
+    --off-white: #F5F5DC;
+}
+
+/* GLOBAL */
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--off-white);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    background-color: var(--primary-dark);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo .app-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.logo .subtitle {
+    font-size: 0.85rem;
+    color: var(--accent-light);
+}
+
+/* HEADER ACTIONS */
+.actions button {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    background: none;
+    border: none;
+    color: var(--off-white);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.actions button:hover {
+    color: var(--accent-light);
+}
+
+/* MAIN */
+.main {
+     flex: 1; /* takes remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* DATE BAR */
+.date-bar {
+    background-color: var(--bg-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 1px solid rgba(139,188,125,0.3);
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+.date-left {
+    display: flex;
+    align-items: center;
+}
+
+.calendar-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    color: var(--accent-light);
+}
+
+.date-text .hijri-date {
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: block;
+    color: var(--accent-light);
+}
+
+.date-text .greg-date {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* VIEW CALENDAR BUTTON */
+.calendar-btn {
+    background-color: var(--accent-light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--primary-dark);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.calendar-btn:hover {
+    background-color: #7a9c6c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    background-color: var(--primary-dark);
+    color: var(--off-white);
+    flex-shrink: 0; /* prevent shrinking */
+}
+
+/* CALENDAR MODAL */
+.calendar-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.calendar-content {
+    background-color: #fff;
+    color: #222;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* CALENDAR GRID */
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-top: 1rem;
+}
+
+.calendar-day-name {
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5rem 0;
+    background-color: #e2e8f0;
+    border-radius: 0.25rem;
+}
+
+.calendar-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: #222;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.calendar-day:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-day.today {
+    background-color: var(--accent-light);
+    color: var(--primary-dark);
+    font-weight: bold;
+}
+
+.calendar-day .greg {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.calendar-day .hijri {
+    font-size: 0.65rem;
+    margin-top: 2px;
+    color: #555;
+}
+
+.calendar-day.empty {
+    background: none;
+    cursor: default;
+}
+
+.calendar-info {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #555;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-dark);
+    width: 250px;
+    height: 100%;
+    padding: 2rem;
+    z-index: 100;
+}
+
+.mobile-menu a {
+    display: block;
+    color: var(--accent-light);
+    text-decoration: none;
+    margin: 1rem 0;
+    transition: color 0.3s;
+}
+
+.mobile-menu a:hover {
+    color: var(--off-white);
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 90;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .actions {
+        margin-top: 1rem;
+    }
+}
