@@ -1,195 +1,227 @@
 
-body {
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --bg: #eef7ff;
+    --text: #002a42;
+    --box-bg: rgba(255, 255, 255, 0.85);
+    --accent: #0088cc;
+    --clock-glow: #00d9ff;
+}
+
+.darkMode {
+    --bg: #052c46;
+    --text: #d9f2ff;
+    --box-bg: rgba(1, 11, 15, 0.70);
+    --accent: #4fc3ff;
+    --clock-glow: #5edfff;
+}
+
+
+body {
+    background: var(--bg);
     font-family: "Poppins", sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay;
-    background-image: url("mosque2.png");
-    background-color: rgb(57, 124, 192);
+    min-height: 100vh;
+    padding: 25px;
+    transition: 0.4s ease-in-out;
 }
 
 
-#zikir, .prayer-box, #prayer {
-    padding: 60px 90px;        
-    margin-left: 50px;          
-    border-radius: 0 100px;     
-    background: rgba(255, 223, 0, 0.08);
-    backdrop-filter: blur(30px);
-    border: 2px solid rgba(255, 215, 0, 0.3);
-    box-shadow:
-        0 0 25px rgba(255, 215, 0, 0.3),
-        0 0 45px rgba(255, 200, 0, 0.25),
-        inset 0 0 20px rgba(255, 215, 0, 0.15);
-    animation: floatBox 5s ease-in-out infinite;
+.page-title {
+    width: 100%;
     text-align: center;
-    transition: 0.4s ease;
-}
-.prayer-box{padding: 100px;}
-
-@keyframes floatBox {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-    100% { transform: translateY(0px); }
-}
-
-#zikir:hover, .prayer-box:hover, #prayer:hover {
-    transform: scale(1.05);
-    box-shadow:
-        0 0 50px rgba(255, 215, 0, 0.9),
-        0 0 80px rgba(255, 223, 0, 0.7),
-        inset 0 0 30px rgba(255, 215, 0, 0.4);
+    font-family: 'El Messiri', sans-serif;
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--accent);
 }
 
 
-#zikir h2, .prayer-box h2, #prayer h2 {
-    font-size: 40px;
-    font-weight: 800;
-    color: #ffd700;
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(255, 223, 0, 0.6);
+@media (max-width: 900px) {
+    .page-title {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
 }
 
-
-.h3z, .p {
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    height: 55px;
+    width: 55px;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     font-size: 25px;
-    color: white;
-    margin-bottom: 20px;
-}
-
-#counter, #countdown {
-    font-size: 60px;
-    font-weight: 900;
-    color: white;
-    text-shadow: 0 0 20px gold;
-}
-
-#countertext, #next, .p1 {
-    margin-top: 20px;
-    font-size: 22px;
-    color: #ffd700;
-}
-
-
-.buttons {
-    margin-top: 25px;
-}
-
-.button {
-    padding: 12px 25px;
-    margin: 5px;
-    font-size: 18px;
-    border: none;
-    border-radius: 12px;
     cursor: pointer;
-    background: gold;
-    color: black;
-    font-weight: 600;
     transition: 0.3s;
+    z-index: 100;
 }
 
-.button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px gold;
-}
-
-
-body.darkMode {
-    background-image: url("mosque4-dark.png");
-    background-color: #111214;
-}
-
-body.darkMode #zikir, 
-body.darkMode .prayer-box, 
-body.darkMode #prayer {
-    background: rgba(0, 130, 210, 0.1);
-    border: 2px solid #1a7cc9;
-    box-shadow:
-        0 0 25px #1a7cc9,
-        0 0 45px #0b5d97,
-        inset 0 0 20px #1a7cc9;
-}
-
-body.darkMode #zikir:hover, 
-body.darkMode .prayer-box:hover, 
-body.darkMode #prayer:hover {
-    box-shadow:
-        0 0 55px #c8e9ff,
-        0 0 80px #1a7cc9,
-        inset 0 0 30px #c8e9ff;
-}
-
-body.darkMode h2 {
-    color: #c8e9ff;
-}
-
-body.darkMode .h3z, 
-body.darkMode .p {
-    color: #e5f4ff;
-}
-
-body.darkMode #counter, 
-body.darkMode #countdown {
-    color: #ffffff;
-}
-
-body.darkMode #countertext, 
-body.darkMode #next, 
-body.darkMode .p1 {
-    color: #a3d9ff;
-}
-
-body.darkMode .button {
-    background: #1a7cc9;
-    color: white;
-}
-
-body.darkMode .button:hover {
-    box-shadow: 0 0 15px #c8e9ff;
+#darkModeToggle:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--accent);
 }
 
 
-#darkModeToggle,#toggle {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    padding: 12px 18px;
+.overlay {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 30px;
+}
+
+
+@media (max-width: 900px) {
+    .overlay {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.prayer-box {
+    width: 450px;
+    max-width: 480px;
+    background: var(--box-bg);
+    border-radius: 25px;
+    padding: 35px;
+    text-align: center;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
+
+.prayer-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+.inside-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 18px;
+}
+
+.calligraphy {
+    width: 190px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px var(--accent));
+}
+
+
+.prayer-box h2 {
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 15px var(--clock-glow); }
+    50% { box-shadow: 0 0 45px var(--clock-glow); }
+    100% { box-shadow: 0 0 15px var(--clock-glow); }
+}
+
+#countdown {
+    font-size: 48px;
+    font-weight: bold;
+    background: #000;
+    color: #00eaff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+@media (max-width: 900px) {
+    #countdown {
+        font-size: 40px;
+    }
+}
+
+#next {
     font-size: 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    transition: 0.3s;
+    font-weight: 500;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.25);
+    padding: 8px 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
-#darkModeToggle,#toggle:hover {
-    transform: scale(1.1);
+
+.left-info {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
 }
 
-@media (max-width: 768px) {
-    #zikir, .prayer-box, #prayer {
-        padding: 40px 50px;
-    }
-    #counter, #countdown {
-        font-size: 44px;
-    }
-    #zikir h2, .prayer-box h2, #prayer h2 {
-        font-size: 30px;
-    }
+
+.right-box {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    background: var(--box-bg);
+    padding: 25px 20px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    backdrop-filter: blur(15px);
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.8;
+    text-align: left;
+    transition: 0.3s ease;
 }
 
-@media (max-width: 480px) {
-    #zikir, .prayer-box, #prayer {
-        padding: 25px 30px;
+.right-box span {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.right-box .past {
+    color: #555;
+    text-decoration: line-through;
+}
+
+.right-box .upcoming {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.right-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+@media (max-width: 900px) {
+    .prayer-box {
+        width: 92%;
+        padding: 30px;
     }
-    #counter, #countdown {
-        font-size: 32px;
+
+    .inside-img {
+        height: 220px;
+    }
+
+    .right-box {
+        max-width: 90%;
+        margin-top: 20px;
+        text-align: center;
     }
 }

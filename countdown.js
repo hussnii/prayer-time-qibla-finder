@@ -86,7 +86,7 @@ const prayertext1 = document.getElementById("prayertext1");
 const prayertext2 = document.getElementById("prayertext2");
 const prayertext3 = document.getElementById("prayertext3");
 const prayertext4 = document.getElementById("prayertext4");
-const prayertext5 = document.getElementById("prayertext5");
+const prayertext5 = documecnt.getElementById("prayertext5");
 
 function saveStatus() {
   const status = {
