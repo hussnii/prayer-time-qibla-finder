@@ -1,181 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const toggle = document.getElementById('darkModeToggle');
     toggle.addEventListener('click', () => {
         document.body.classList.toggle('darkMode');
-        if(document.body.classList.contains('darkMode')){
-            toggle.textContent = "☀️"; 
-        } else {
-            toggle.textContent = "🌙"; 
-        }
-    })});
-const latitude = 9.03; 
-const longitude = 38.74; 
-const method = 2; 
+        toggle.textContent = document.body.classList.contains('darkMode') ? "☀️" : "🌙";
+    });
 
-async function getPrayerTimes() {
-    try {
+    const latitude = 9.03;
+    const longitude = 38.74;
+    const method = 2;
+
+    const motivationalTexts = [
+        "Prayer is your connection to peace and guidance.",
+        "Keep your heart focused and your soul strong.",
+        "A moment of prayer can change your entire day.",
+        "Seek Allah's mercy, it is never too late.",
+        "Every prayer is a step closer to inner calm."
+    ];
+
+    async function getPrayerTimes() {
         const url = `https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=${method}`;
         const response = await fetch(url);
         const data = await response.json();
         return data.data.timings;
-    } catch (err) {
-        console.error("Error fetching prayer times:", err);
-        return null;
     }
-}
 
-function convertToDate(timeStr) {
-    const [hour, minute] = timeStr.split(":").map(Number);
-    const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0);
-}
-function getNextPrayer(prayerTimes, currentTime) {
-    const order = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-    for (const name of order) {
-        const prayerDate = convertToDate(prayerTimes[name]);
-        if (prayerDate > currentTime) {
-            return { name, date: prayerDate };
+    function convertToDate(timeStr) {
+        const [hour, minute] = timeStr.split(":").map(Number);
+        const now = new Date();
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0);
+    }
+
+    function getNextPrayer(prayerTimes, currentTime) {
+        const order = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+        for (const name of order) {
+            const prayerDate = convertToDate(prayerTimes[name]);
+            if (prayerDate > currentTime) {
+                const lastIndex = order.indexOf(name) === 0 ? 4 : order.indexOf(name) - 1;
+                const lastPrayer = order[lastIndex];
+                return { next: { name, date: prayerDate }, last: lastPrayer };
+            }
         }
+        const tomorrowFajr = convertToDate(prayerTimes.Fajr);
+        tomorrowFajr.setDate(tomorrowFajr.getDate() + 1);
+        return { next: { name: "Fajr", date: tomorrowFajr }, last: "Isha" };
     }
-    const tomorrowFajr = convertToDate(prayerTimes.Fajr);
-    tomorrowFajr.setDate(tomorrowFajr.getDate() + 1);
-    return { name: "Fajr", date: tomorrowFajr };
-}
 
-function formatCountdown(ms) {
-    const totalSeconds = Math.floor(ms / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-}
-async function updateCountdown() {
-    const prayerTimes = await getPrayerTimes();
-    if (!prayerTimes) return;
+    function formatCountdown(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+    }
 
-    const now = new Date();
+    function updateRightBoxText() {
+        const motivationEl = document.getElementById("upcomingPrayer"); // You can also create a separate span with id="motivationText"
+        motivationEl.innerText = motivationalTexts[Math.floor(Math.random() * motivationalTexts.length)];
+    }
 
-    const nextPrayer = getNextPrayer(prayerTimes, now);
-    const remaining = nextPrayer.date - now;
+    async function updateCountdown() {
+        const prayerTimes = await getPrayerTimes();
+        if (!prayerTimes) return;
 
-    document.getElementById("countdown").innerText = formatCountdown(remaining);
-    document.getElementById("next").innerText = `time left to ${nextPrayer.name}`;
-}
+        const now = new Date();
+        const { next, last } = getNextPrayer(prayerTimes, now);
+        const remaining = next.date - now;
 
+        const countdownEl = document.getElementById("countdown");
+        const nextEl = document.getElementById("next");
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
-const toggle = document.getElementById("toggle");
+        if (remaining <= 0) {
+            countdownEl.innerText = "00:00:00";
+            nextEl.innerText = `Time for ${next.name}!`;
+            updateRightBoxText(); // Update motivational text when countdown hits 0
+        } else {
+            countdownEl.innerText = formatCountdown(remaining);
+            nextEl.innerText = `Time left to ${next.name}`;
+        }
 
-toggle.addEventListener("click", () => {
-    document.body.classList.toggle("darkMode");
+        document.getElementById("lastPrayer").innerText = `Last Prayer: ${last}`;
+    }
 
-    // Change button emoji
-    toggle.textContent = 
-        document.body.classList.contains("darkMode") ? "☀️" : "🌙";
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 });
-
-const fajir = document.getElementById("fajir");
-const dhuhr = document.getElementById("dhuhr");
-const asr = document.getElementById("asr");
-const maghrib = document.getElementById("maghrib");
-const isha = document.getElementById("isha");
-
-const prayertext1 = document.getElementById("prayertext1");
-const prayertext2 = document.getElementById("prayertext2");
-const prayertext3 = document.getElementById("prayertext3");
-const prayertext4 = document.getElementById("prayertext4");
-const prayertext5 = documecnt.getElementById("prayertext5");
-
-function saveStatus() {
-  const status = {
-    fajir: fajir.checked,
-    dhuhr: dhuhr.checked,
-    asr: asr.checked,
-    maghrib: maghrib.checked,
-    isha: isha.checked,
-    date: new Date().toDateString()
-  };
-  localStorage.setItem("prayerStatus", JSON.stringify(status));
-}
-
-function resetAll() {
-  fajir.checked = false;
-  dhuhr.checked = false;
-  asr.checked = false;
-  maghrib.checked = false;
-  isha.checked = false;
-
-  prayertext1.textContent = "";
-  prayertext2.textContent = "";
-  prayertext3.textContent = "";
-  prayertext4.textContent = "";
-  prayertext5.textContent = "";
-
-  saveStatus();
-}
-
-function loadStatus() {
-  const saved = JSON.parse(localStorage.getItem("prayerStatus"));
-  const today = new Date().toDateString();
-
-  if (!saved || saved.date !== today) {
-    resetAll(); 
-    return;
-  }
-  fajir.checked = saved.fajir;
-  dhuhr.checked = saved.dhuhr;
-  asr.checked = saved.asr;
-  maghrib.checked = saved.maghrib;
-  isha.checked = saved.isha;
-}
-function setupListeners() {
-  fajir.addEventListener("change", () => {
-    prayertext1.textContent = fajir.checked
-      ? "Fajr completed —MashaAllah!"
-      : "";
-    saveStatus();
-  });
-
-  dhuhr.addEventListener("change", () => {
-    prayertext2.textContent = dhuhr.checked
-      ? "Dhuhr completed —MashaAllah!"
-      : "";
-    saveStatus();
-  });
-
-  asr.addEventListener("change", () => {
-    prayertext3.textContent = asr.checked
-      ? "Asr completed — MashaAllah!"
-      : "";
-    saveStatus();
-  });
-
-  maghrib.addEventListener("change", () => {
-    prayertext4.textContent = maghrib.checked
-      ? "Maghrib completed — MashaAllah!"
-      : "";
-    saveStatus();
-  });
-
-  isha.addEventListener("change", () => {
-    prayertext5.textContent = isha.checked
-      ? " Isha completed — MashaAllah!"
-      : "";
-    saveStatus();
-  });
-}
-
-loadStatus();
-setupListeners();
-function checkMidnight() {
-  const saved = JSON.parse(localStorage.getItem("prayerStatus"));
-  const today = new Date().toDateString();
-
-  if (!saved || saved.date !== today) {
-    resetAll();
-  }
-}
-
-setInterval(checkMidnight, 30000);
