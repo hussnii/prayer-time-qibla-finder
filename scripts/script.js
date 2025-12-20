@@ -56,18 +56,25 @@ function showWarning(message) {
 
 
 // --- Placeholder UI Update Functions (Defined in other modules) ---
-function updatePrayerTimes(data) {
-    console.log("Updated Prayer Times:", data.data.timings);
-    // Logic to display Fajr, Dhuhr, Asr, etc., goes here.
+function updatePrayerTimes(response) {
+  const timings = response.data.timings;
+
+  console.log("This is a test:", timings);
+
+  document.getElementById("prayertext1").textContent = timings.Fajr;
+  document.getElementById("prayertext2").textContent = timings.Dhuhr;
+  document.getElementById("prayertext3").textContent = timings.Asr;
+  document.getElementById("prayertext4").textContent = timings.Maghrib;
+  document.getElementById("prayertext5").textContent = timings.Isha;
 }
 
 function updateHijriDate(data) {
-    console.log("Updated Hijri Date:", data.data.date.hijri);
+    // console.log("Updated Hijri Date:", data.data.date.hijri);
     // Logic to display the Hijri date goes here.
 }
 
 function updateCountdown(data) {
-    console.log("Countdown data ready.");
+    // console.log("Countdown data ready.");
     // Logic to start the countdown timer goes here.
 }
 
@@ -83,8 +90,8 @@ async function getPrayerTimes() {
         return; 
     }
     
-    
-    const url = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=2`;
+    const date = "01-01-2025"
+    const url = `https://api.aladhan.com/v1/timingsByCity/${date}?city=${city}&country=${country}&method=2`;
 
     try {
         
